@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Finalizar Pedido</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #e6f0fa; padding: 20px; text-align: center; color: #333; }
+    .container { background: white; padding: 30px; border-radius: 10px; max-width: 600px; margin: auto; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    .btn { background-color: #1f4e79; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; margin: 10px; }
+    .btn:hover { background-color: #163a5a; }
+    img { max-width: 200px; margin-top: 10px; }
+    .pix-info { margin: 20px 0; }
+    .copiado { color: green; font-weight: bold; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Resumo do Pedido</h1>
+    <p><strong>Produto:</strong> <span id="produto"></span></p>
+    <p><strong>Preço unitário:</strong> R$ <span id="preco"></span></p>
+    <p><strong>Quantidade:</strong> <span id="qtd"></span></p>
+    <p><strong>Total:</strong> R$ <span id="total"></span></p>
+
+    <div class="pix-info">
+      <h2>Finalize sua compra via PIX</h2>
+      <p>Escaneie o QR Code abaixo ou copie a chave PIX.</p>
+      <img src="img/qrcode neo site.png" alt="QR Code PIX">
+      <p><strong>Chave PIX:</strong></p>
+      <p id="chave">papelariaeservicos2021@gmail.com</p>
+      <button class="btn" onclick="copiarChave()">Copiar chave PIX</button>
+      <div id="mensagemCopiado" class="copiado" style="display:none;">Chave copiada!</div>
+    </div>
+
+    <button class="btn" onclick="enviarWhatsApp()">Enviar pelo WhatsApp</button>
+    <a href="index.html" class="btn">Voltar ao início</a>
+  </div>
+
+  <script>
+    function copiarChave() {
+      const chave = document.getElementById("chave").textContent;
+      navigator.clipboard.writeText(chave).then(() => {
+        document.getElementById("mensagemCopiado").style.display = "block";
+        setTimeout(() => {
+          document.getElementById("mensagemCopiado").style.display = "none";
+        }, 2000);
+      });
+    }
+
+    function enviarWhatsApp() {
+      const produto = document.getElementById("produto").textContent;
+      const qtd = document.getElementById("qtd").textContent;
+      const total = document.getElementById("total").textContent;
+      const msg = `Olá! Gostaria de finalizar o pedido:\nProduto: ${produto}\nQuantidade: ${qtd}\nTotal: R$ ${total}`;
+      const url = `https://wa.me/5585987451317?text=${encodeURIComponent(msg)}`;
+      window.open(url, '_blank');
+    }
+
+    // Pega os dados da URL e preenche na tela
+    const urlParams = new URLSearchParams(window.location.search);
+    const produto = urlParams.get("produto");
+    const preco = parseFloat(urlParams.get("preco")) || 0;
+    const qtd = parseInt(urlParams.get("qtd")) || 1;
+    const total = preco * qtd;
+
+    document.getElementById("produto").textContent = produto || "-";
+    document.getElementById("preco").textContent = preco.toFixed(2);
+    document.getElementById("qtd").textContent = qtd;
+    document.getElementById("total").textContent = total.toFixed(2);
+  </script>
+</body>
+</html>

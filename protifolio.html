@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Papelaria e Gráfica Rápida</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding-bottom: 80px; /* Espaço para footer fixo */
+      background-color: #f4f4f4;
+    }
+    header {
+      background: linear-gradient(to right, #005f73, #0a9396);
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+    table {
+      width: 95%;
+      max-width: 1000px;
+      border-collapse: collapse;
+      margin: 20px auto;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 12px 10px;
+      border-bottom: 1px solid #ddd;
+      text-align: center;
+    }
+    th {
+      background-color: #0a9396;
+      color: white;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    img {
+      width: 100px;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    input[type=number] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+      text-align: center;
+    }
+    .botao-finalizar, .botao-limpar {
+      display: inline-block;
+      margin: 4px 4px 0 4px;
+      padding: 6px 14px;
+      border: none;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      text-decoration: none;
+      user-select: none;
+    }
+    .botao-finalizar {
+      background-color: #219653;
+    }
+    .botao-finalizar:hover {
+      background-color: #1b7a3e;
+    }
+    .botao-limpar {
+      background-color: #eb5757;
+    }
+    .botao-limpar:hover {
+      background-color: #b83232;
+    }
+    footer {
+      background-color: #0a9396;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      font-weight: 600;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
+      letter-spacing: 1px;
+    }
+    /* Seção WhatsApp e QR Code */
+    .contato-whatsapp {
+      max-width: 500px;
+      margin: 30px auto 10px;
+      background: white;
+      padding: 15px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .qr-code {
+      width: 110px;
+      height: 110px;
+      border-radius: 12px;
+      box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+    .numero-whatsapp {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #0a9396;
+      user-select: all;
+    }
+    .btn-copiar {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 20px;
+      background-color: #219653;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn-copiar:hover {
+      background-color: #1b7a3e;
+    }
+    /* Responsivo */
+    @media (max-width: 700px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead tr {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        background: white;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+      }
+      td {
+        border: none;
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        top: 12px;
+        font-weight: 700;
+        color: #0a9396;
+      }
+      img {
+        width: 80px;
+      }
+      input[type=number] {
+        width: 50px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Papelaria e Gráfica Rápida
+  </header>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Imagem</th>
+        <th>Produto</th>
+        <th>Descrição</th>
+        <th>Preço (R$)</th>
+        <th>Quantidade</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-produtos">
+      <tr>
+        <td data-label="Imagem"><img src="img/cartaovisita.jpg" alt="cartaovisita" /></td>
+        <td data-label="Produto">Cartão de Visita</td>
+        <td data-label="Descrição">Impressão de cartões com acabamento profissional usamos o papel couchê 230g 100 und.</td>
+        <td data-label="Preço">50,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd1" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('Cartão de Visita', 'qtd1', 50)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd1')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/boleto-bancario.jpg" alt="Impressão de Boletos" /></td>
+        <td data-label="Produto">Impressão de Boletos</td>
+        <td data-label="Descrição">Impressão digital rápida e segura de boletos, imagens</td>
+        <td data-label="Preço">3,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd2" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('Impressão de Boletos', 'qtd2', 3)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd2')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/adesivos-variados.png" alt="Adesivos Personalizados" /></td>
+        <td data-label="Produto">Adesivos Personalizados</td>
+        <td data-label="Descrição">Crie seus próprios adesivos em diversos tamanhos folha Tam. A3</td>
+        <td data-label="Preço">25,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd3" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('Adesivos Personalizados', 'qtd3', 25)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd3')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/caneca-dia-dos- namorados.png" alt="Caneca Personalizada" /></td>
+        <td data-label="Produto">Caneca Personalizada p/ o dia dos namorados</td>
+        <td data-label="Descrição">Estampe fotos, logos ou frases em canecas</td>
+        <td data-label="Preço">35,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd4" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('Caneca Personalizada', 'qtd4', 35)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd4')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/camisa-dia-dos- namorados.jpeg" alt="Camisa Personalizada" /></td>
+        <td data-label="Produto">Camisa Personalizada</td>
+        <td data-label="Descrição">Camisas com estampas exclusivas sob medida para o dia dos namorados</td>
+        <td data-label="Preço">45,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd5" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('Camisa Personalizada', 'qtd5', 45)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd5')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/quadro-branco.png" alt="quadro-branco" /></td>
+        <td data-label="Produto">Quadro branco Tam. 100x70 </td>
+        <td data-label="Descrição">Quadro branco super grande ideal para um bom aprendizado</td>
+        <td data-label="Preço">120,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd6" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('quadro branco', 'qtd6', 120)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd6')">Limpar</button>
+        </td>
+      </tr>
+      <tr>
+        <td data-label="Imagem"><img src="img/" alt="quadro-branco" /></td>
+        <td data-label="Produto">Quadro branco Tam. 100x70 </td>
+        <td data-label="Descrição">Quadro branco super grande ideal para um bom aprendizado</td>
+        <td data-label="Preço">120,00</td>
+        <td data-label="Quantidade"><input type="number" id="qtd6" min="1" /></td>
+        <td data-label="Ações">
+          <a href="#" class="botao-finalizar" onclick="enviarPedido('quadro branco', 'qtd6', 120)">Finalizar</a><br />
+          <button class="botao-limpar" onclick="limparCampo('qtd6')">Limpar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section class="contato-whatsapp" aria-label="Contato WhatsApp">
+    <img
+      id="qrCode"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://wa.me/5585987451317"
+      alt="QR Code WhatsApp Papelaria"
+      class="qr-code"
+      aria-hidden="true"
+    />
+    <div>
+      <p class="numero-whatsapp" id="numeroWhatsApp">papelariaeservicos2021@gmail.com</p>
+      <button class="btn-copiar" onclick="copiarNumero()">Copia e cola a chave pix no App</button>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Papelaria e Gráfica Rápida | WhatsApp: (85) 98745-1317
+  </footer>
+
+  <script>
+    function enviarPedido(produto, idQtd, preco) {
+      const qtdInput = document.getElementById(idQtd);
+      const qtd = parseInt(qtdInput.value);
+      if (!qtd || qtd < 1) {
+        alert("Por favor, insira uma quantidade válida.");
+        qtdInput.focus();
+        return;
+      }
+      const total = qtd * preco;
+      const msg = `Olá! Gostaria de pedir ${qtd} unidade(s) de ${produto}. Total: R$ ${total.toFixed(2)}`;
+      const url = `https://wa.me/5585987451317?text=${encodeURIComponent(msg)}`;
+
+      // Atualiza o QR Code para o link com o pedido personalizado
+      atualizarQRCode(url);
+
+      // Abre o WhatsApp no navegador numa nova aba
+      window.open(url, "_blank");
+    }
+
+    function atualizarQRCode(link) {
+      const qr = document.getElementById("qrCode");
+      // API de QR Code gera imagem via URL
+      // Codifica o link para URL segura
+      const urlQR = `https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=${encodeURIComponent(
+        link
+      )}`;
+      qr.src = urlQR;
+    }
+
+    function limparCampo(id) {
+      document.getElementById(id).value = "";
+      // Reseta o QR Code para o padrão do contato sem pedido
+      const qr = document.getElementById("qrCode");
+      qr.src =
+        "https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https://wa.me/5585987451317";
+    }
+
+    function copiarNumero() {
+      const numero = document.getElementById("numeroWhatsApp").textContent.trim();
+      if (navigator.clipboard) {
+        navigator.clipboard
+          .writeText(numero)
+          .then(() => {
+            alert("Número copiado para a área de transferência!");
+          })
+          .catch(() => {
+            alert(
+              "Não foi possível copiar o número automaticamente. Por favor, copie manualmente."
+            );
+          });
+      } else {
+        alert(
+          "Seu navegador não suporta copiar automaticamente. Copie manualmente: " + numero
+        );
+      }
+    }
+  </script>
+</body>
+</html>

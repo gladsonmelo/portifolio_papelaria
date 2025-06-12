@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Papelaria e Gráfica Rápida</title>
+  <style>
+    body { margin: 0; padding: 0; background-color: #e6f0fa; font-family: Arial, sans-serif; color: #333; }
+    header { background-color: #1f4e79; color: white; padding: 20px; text-align: center; }
+    nav { background-color: #ffc857; padding: 10px; text-align: center; }
+    nav a { color: #1f4e79; text-decoration: none; margin: 0 15px; font-weight: bold; }
+    .container { padding: 20px; text-align: center; }
+    .btn { background-color: #ffc857; color: #1f4e79; padding: 10px 15px; text-decoration: none; border: none; border-radius: 5px; font-weight: bold; margin: 5px; cursor: pointer; }
+    .btn:hover { opacity: 0.9; }
+    footer { background-color: #1f4e79; color: white; padding: 10px; text-align: center; margin-top: 40px; }
+    .highlight { color: #ff6b35; font-weight: bold; }
+    table { width: 100%; max-width: 900px; margin: 20px auto; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 10px; vertical-align: middle; text-align: center; }
+    th { background-color: #1f4e79; color: white; }
+    img.produto { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border-radius: 6px; }
+    .modal { display: none; position: fixed; z-index: 10; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.8); }
+    .modal-content-box { background:white; margin:10% auto; padding:20px; border-radius:10px; max-width:400px; position:relative; text-align:center; }
+    .close { position: absolute; top: 10px; right: 20px; font-size: 30px; color: #1f4e79; font-weight: bold; cursor: pointer; }
+    .total { margin-top: 20px; font-size: 1.2em; }
+    input[type="number"] { width: 50px; text-align: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Papelaria e Gráfica Rápida</h1>
+    <p>Serviços rápidos, personalizados e com qualidade!</p>
+  </header>
+  <nav>
+    <a href="#">Início</a>
+    <a href="#">Portfólio</a>
+    <a href="#">Produtos</a>
+    <a href="#">Contato</a>
+  </nav>
+  <div class="container">
+    <h2>Bem-vindo ao nosso site!</h2>
+    <p>Oferecemos <span class="highlight">cartões de visita, impressões, personalização de canecas, camisas e muito mais</span>.</p>
+    <a href="https://wa.me/5585987451317" class="btn" target="_blank">Fale conosco no WhatsApp</a>
+    <p> <H2 p style="color: rgb(8, 80, 163);">OPÇÕES DE ENTREGA:<BR> FRETE GRÁTIS  A PARTIR DE 200,00 EM COMPRAS; RETIRADA NA LOJA OU MOTOUBER 
+      <BR> AO FINALIZAR A COMPRA INDICAR END. DE ENTREGA.</H2></p>
+    <p>  <p style="color: rgb(247, 3, 3);"><b></b></p>
+
+    <h2 style="margin-top: 40px; color: rgb(5, 39, 131);">MONTE SEU PEDIDO CLICANDO NA IMAGEM DOS PRODUTOS</h2>
+    <table>
+      <thead>
+        <tr><th>Imagem</th><th>Produto</th><th>Preço (R$)</th><th>Qtd</th></tr>
+      </thead>
+      <tbody id="product-list">
+        <tr>
+          <td><img src="img/cartao-visita.jpg" class="produto" alt="cartao-visita " /></td>
+          <td>Cartão de Visita no papel couchê gramatura 250g - só frente qtd.100 unid.</td>
+          <td>50.00</td>
+          <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caneca-persona.png" class="produto" alt="caneca-persona" /></td>
+          <td>Caneca Personalizada escolha o tema envie para o nosso zap</td>
+          <td>35.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/camisa-maculina.png" class="produto" alt="camisa-maculina" /></td>
+          <td>Camisa Personalizada masculina Tam.G cores variadas  envie o tema para o nosso zap  </td>
+          <td>45.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+         <tr>
+          <td><img src="img/camisa-feminina.png" class="produto" alt="camisa-feminina" /></td>
+          <td>Camisa Personalizada feminina Tam.G cores variadas  envie o tema para o nosso zap  </td>
+          <td>45.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/cartaz.jpg" class="produto" alt="cartaz" /></td>
+          <td>Cartaz tam. A4/A3 nos envie a arte ou nos mesmos criamos5</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/curriculo-personalizado.png" class="produto" alt="curriculo" /></td>
+          <td>Currículo personalizado c/ foto - basta enivar os dados para o nosso zap</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/carta-de-apresentacao.png" class="produto" alt="carta-de-apresentacao" /></td>
+          <td>Carta de apresentação- basta enivar os dados para o nosso zap</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/foto.jpg" class="produto" alt="foto" /></td>
+          <td>foto 3x4 no papel fotográfico  qtd 10 und. cortadas no tam. certinho (É so enviar a foto para o nosso zap) </td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/fotos.jpg" class="produto" alt="fotos" /></td>
+          <td>Fotos 10x15 no papel fotográfico qtd. 04 und. (É so enviar a foto para o nosso zap)</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/adesivo.jpg" class="produto" alt="adesivo" /></td>
+          <td>Impressão em Adesivo redondo já cortados tam 4,5cmx4,5cm folha com 60 und.</td>
+          <td>35.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/impressao-digital.jpg" class="produto" alt="impressão" /></td>
+          <td>Impressão digital colorida qtd. 01 </td>
+          <td>3.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/xerox-digital.jpg" class="produto" alt="xerox" /></td>
+          <td>Xerx digital 01 lado p&b</td>
+          <td>1.50</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/calculadora-12.jpg" class="produto" alt="calculadora" /></td>
+          <td>Calculadora 12 digitos Kenko c/ pilha AAA </td>
+          <td>25.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/carregador-iphone.jpg" class="produto" alt="carregador-iphone" /></td>
+          <td>Carregador de Iphone</td>
+          <td>35.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/carregador-tipo-c.jpg" class="produto" alt="carregador-tipo-c" /></td>
+          <td>Carregador tipo c Sansung</td>
+          <td>25.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pen-drive.png" class="produto" alt="pen-drive" /></td>
+          <td>Pen Drive 16 GB AL-U-16</td>
+          <td>35.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/almofada-carimbo.jpg" class="produto" alt="almofada-carimbo" /></td>
+          <td>Almofada p/ carimbo nas cores Verm. Azul e Preta</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/tinta-tecido.jpg" class="produto" alt="tinta-tecido" /></td>
+          <td>Tinta p/ tecido 37g Várias cores 01 und.</td>
+          <td>6.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/tinta-pva.jpg" class="produto" alt="tinta-pva" /></td>
+          <td>Tinta artesanato 37g Várias cores 01 und.</td>
+          <td>6.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/tela-pintura-18x24.jpg" class="produto" alt="tela-pintura-18x24" /></td>
+          <td>Tela de pintura tam. 18x24 01 und.</td>
+          <td>12.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/tela-pintura-20x30.jpg" class="produto" alt="tela-pintura-20x30" /></td>
+          <td>Tela pintura tam. 20x30 01 und.</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pincel-acabamento.jpg" class="produto" alt="pincel-acabamento" /></td>
+          <td>Pincel acabamento 01 und.</td>
+          <td>8.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pincel-chato-02.jpg" class="produto" alt="pincel-chato-02" /></td>
+          <td>Pincel chato nº02 - 01 und.</td>
+          <td>10.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pincel-chato-10.jpg" class="produto" alt="pincel-chato-10" /></td>
+          <td>pincel chato nº 10 - 01 und.</td>
+          <td>12.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pincel-chato-20.jpg" class="produto" alt="pincel-chato-20" /></td>
+          <td>pincel chato nº20 - 01 und.</td>
+          <td>14.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pistola-grande.jpg" class="produto" alt="pistola-grande" /></td>
+          <td>Pistola de cola quente grande LeoArte 01 und.</td>
+          <td>38.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/pistola-pequena.jpg" class="produto" alt="pistola-pequena" /></td>
+          <td>Pistola de cola quente LeoArte  01 und.</td>
+          <td>32.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bastao-cola-grande.jpg" class="produto" alt="bastao-cola-grande" /></td>
+          <td>Bastão de cola quente grosso TekBond 01 und.</td>
+          <td>2.50</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bastao-cola-pequena.jpg" class="produto" alt="bastao-cola-pequena" /></td>
+          <td>bastão de cola pequena TekBond  01 und.</td>
+          <td>2.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/fita-dupla-550.png" class="produto" alt="fita-dupla-550" /></td>
+          <td>Fita dupla face Adelbras 550g  01 und.</td>
+          <td>18.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/fita-dupla-espuma.png" class="produto" alt="fita-dupla-espuma" /></td>
+          <td>Fita dupla face Adelbras Espuma 1,5kg  01 und.</td>
+          <td>20.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/plastificacao.jpg" class="produto" alt="plastificacao" /></td>
+          <td> Plastificação de doc  tam. A4 - 01 und.</td>
+          <td>8.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/plastificacao.jpg" class="produto" alt="plastificacao" /></td>
+          <td>Plastificação de doc. tipo RG 01 und.</td>
+          <td>5.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/resma-papel.jpg" class="produto" alt="resma-papel" /></td>
+          <td>Resma de papel Report A4 - 01 und.</td>
+          <td>30.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caderno-pets.jpg" class="produto" alt="caderno-pets" /></td>
+          <td>Caderno Pets pequeno c/ 96 folhas - arame capa dura - 01 und.</td>
+          <td>8.00</td>
+          <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caderno-01.jpg" class="produto" alt="caderno-01" /></td>
+          <td>Caderno de 01 matéria - 01 und.</td>
+          <td>15.00</td>
+          <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/Caderno-10.jpg" class="produto" alt="caderno-10" /></td>
+          <td>Caderno de 10 matérias - 01 und.</td>
+          <td>20.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caderno-20.jpg" class="produto" alt="caderno-20" /></td>
+          <td>Caderno de 20 matérias c/ 400 folhas várias estampas- 01 und.</td>
+          <td>40.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caderno-brochura.jpg" class="produto" alt="caderno-brochura" /></td>
+          <td>Caderno brochura sem arame capa dura - 01 und.</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/caderno-desenho.jpg" class="produto" alt="caderno-desenho" /></td>
+          <td> Caderno cartográfico de desenho capa dura masc./fem.- 01 und.</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/resma-papel.jpg" class="produto" alt="resma-papel" ></td>
+          <td>Resma de papel Report A4 - 01 und.</td>
+          <td>30.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/carne-inss.jpg" class="produto" alt="carne-inss" ></td>
+          <td>Carnê do INSS - 01 und.</td>
+          <td>6.00</td>
+          <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+         <tr>
+          <td><img src="img/cartolina-cartao.jpg" class="produto" alt="cartolina-cartao" ></td>
+          <td>Cartolina cartão bom p/ trabalho escolar cores variadas - 01 und.</td>
+          <td>4.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/cartolina-dupla.jpg" class="produto" alt="cartolina-dupla" ></td>
+          <td>cartolina dupla face cores variadas- 01 und.</td>
+          <td>3.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/eva-liso.jpg" class="produto" alt="eva-liso" /></td>
+          <td>EVA liso tam. 40x95 - 01 und.</td>
+          <td>8.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/eva-glitter.jpg" class="produto" alt="eva-glitter" /></td>
+          <td>EVA c/ glitter tam. 40x60 - 01 und.</td>
+          <td>10.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <tr>
+          <td><img src="img/caneta-bic.jpg" class="produto" alt="caneta-bic" /></td>
+          <td>Caneta esferográfica BIC cores: Ver.Azul e Preta - 01 und.</td>
+          <td>2.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <tr>
+          <td><img src="img/quadro-branco.png" class="produto" alt="quadro-branco" /></td>
+          <td>Quadro branco tam. 70cm x 100mt - 01 und.</td>
+          <td>120.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+         <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 05mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>1.50</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 10mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>2.50</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 50mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>3.50</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 75mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>6.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 100mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>8.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 150mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>12.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+        <tr>
+          <td><img src="img/bola-isopor.png" class="produto" alt="bola-isopor" /></td>
+          <td>Bola de isopor 200mm bom p/ trabalhos em maquete - 01 und.</td>
+          <td>15.00</td>
+           <td><input type="number" min="0" value="0" oninput="calcularTotal()"></td>
+        </tr>
+      </tbody>
+      </table>
+    <div class="total" id="total-value">Total: R$ 0.00</div>
+    <button class="btn" onclick="limpar()">Limpar</button>
+    <button class="btn" onclick="enviarWhatsApp()">Enviar pelo WhatsApp</button>
+  </div>
+  <footer><p>&copy; 2025 Papelaria e Gráfica Rápida - Todos os direitos reservados</p></footer>
+
+  <!-- Modal Interativo -->
+  <div id="modal" class="modal">
+    <div class="modal-content-box">
+      <span class="close" onclick="document.getElementById('modal').style.display='none'">&times;</span>
+      <img id="modal-img" src="" style="width:200px; border-radius:10px;"><br><br>
+      <div id="modal-nome" style="font-weight:bold; font-size:18px;"></div>
+      <div id="modal-preco" style="margin:5px 0;"></div>
+      <label>Qtd: <input type="number" id="modal-qtd" min="0" value="1" style="width:60px; text-align:center;" onchange="calcularTotalModal()"></label>
+      <div id="modal-total" style="margin-top:10px; font-size:16px;"></div>
+      <br>
+      <button class="btn" onclick="limparModal()">Limpar</button>
+      <button class="btn" onclick="finalizarProduto()">Finalizar</button>
+      <button class="btn" onclick="enviarProdutoWhatsApp()">WhatsApp</button>
+    </div>
+  </div>
+
+<script>
+    const telefone = "5585987451317";
+    let modalProduto = {};
+
+    function calcularTotal() {
+        let total = 0;
+        document.querySelectorAll("#product-list tr").forEach(linha => {
+            const preco = parseFloat(linha.children[2].textContent);
+            const qtd = parseInt(linha.children[3].children[0].value) || 0;
+            if (qtd > 0) {
+                total += preco * qtd;
+            }
+        });
+        document.getElementById("total-value").innerHTML = '<span style="color: red; font-weight: bold;">Total: R$ ' + total.toFixed(2) + '</span>';
+    }
+
+    function limpar() {
+        document.querySelectorAll("#product-list input[type='number']").forEach(input => {
+            input.value = 0;
+        });
+        calcularTotal();
+    }
+
+    function enviarWhatsApp() {
+        let mensagem = "*Pedido Papelaria e Gráfica Rápida:*\n";
+        let total = 0;
+        let itensSelecionados = 0;
+
+        document.querySelectorAll("#product-list tr").forEach(linha => {
+            const nome = linha.children[1].textContent.trim();
+            const preco = parseFloat(linha.children[2].textContent);
+            const qtd = parseInt(linha.children[3].children[0].value) || 0;
+            if (qtd > 0) {
+                mensagem += `• ${nome} - Qtd: ${qtd} - R$ ${(preco * qtd).toFixed(2)}\n`;
+                total += preco * qtd;
+                itensSelecionados++;
+            }
+        });
+
+        if (itensSelecionados === 0) {
+            alert("Você precisa selecionar pelo menos 1 produto.");
+            return;
+        }
+
+        mensagem += `\n*Total: R$ ${total.toFixed(2)}*`;
+        const link = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+        window.open(link, "_blank");
+    }
+
+    document.querySelectorAll("img.produto").forEach((img, index) => {
+        img.addEventListener("click", () => abrirModal(img, index));
+    });
+
+    function abrirModal(img, index) {
+        const linha = img.closest("tr");
+        const nome = linha.children[1].textContent.trim();
+        const preco = parseFloat(linha.children[2].textContent);
+
+        modalProduto = { nome, preco, imagem: img.src };
+        document.getElementById("modal-img").src = modalProduto.imagem;
+        document.getElementById("modal-nome").textContent = modalProduto.nome;
+        document.getElementById("modal-preco").textContent = "Preço: R$ " + modalProduto.preco.toFixed(2);
+        document.getElementById("modal-qtd").value = 1;
+        calcularTotalModal();
+        document.getElementById("modal").style.display = "block";
+    }
+
+    function calcularTotalModal() {
+        const qtd = parseInt(document.getElementById("modal-qtd").value) || 0;
+        const total = modalProduto.preco * qtd;
+        document.getElementById("modal-total").innerHTML = '<span style="color: red; font-weight: bold;">Subtotal: R$ ' + total.toFixed(2) + '</span>';
+    }
+
+    function limparModal() {
+        document.getElementById("modal-qtd").value = 0;
+        calcularTotalModal();
+    }
+
+    function finalizarProduto() {
+        const qtd = parseInt(document.getElementById("modal-qtd").value);
+        if (qtd > 0) {
+            const url = `finalizar.html?produto=${encodeURIComponent(modalProduto.nome)}&qtd=${qtd}&preco=${modalProduto.preco}`;
+            window.location.href = url;
+        } else {
+            alert("Informe uma quantidade válida.");
+        }
+    }
+
+    function enviarProdutoWhatsApp() {
+        const qtd = parseInt(document.getElementById("modal-qtd").value);
+        if (qtd > 0) {
+            const total = modalProduto.preco * qtd;
+            const mensagem = `*Pedido Papelaria e Gráfica Rápida:*\nProduto: ${modalProduto.nome}\nQuantidade: ${qtd}\nTotal: R$ ${total.toFixed(2)}`;
+            const link = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+            window.open(link, "_blank");
+        } else {
+            alert("Informe uma quantidade válida.");
+        }
+    }
+</script>
+</body>
+</html>
